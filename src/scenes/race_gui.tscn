@@ -81,9 +81,9 @@ text = "2,200 m"
 [node name="TextureRect" type="TextureRect" parent="." unique_id=478350783]
 modulate = Color(1, 1, 1, 0.39215687)
 layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 562.0
-offset_bottom = 306.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 537.0
+offset_bottom = 281.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_buknr")

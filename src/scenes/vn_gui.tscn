@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://dppesghpmvpte"]
+
+[ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="1_hp63c"]
+[ext_resource type="FontFile" uid="uid://buee7dwokh4ef" path="res://fonts/helvetica-neue-5/HelveticaNeueRoman.otf" id="2_hp63c"]
+[ext_resource type="Texture2D" uid="uid://b0ex8ckextpgs" path="res://assets/down.svg" id="3_atrfh"]
+
+[sub_resource type="Gradient" id="Gradient_are0y"]
+colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_anp1u"]
+gradient = SubResource("Gradient_are0y")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_m6tk8"]
+offsets = PackedFloat32Array(0, 0.06626506, 0.92771083, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j1bik"]
+gradient = SubResource("Gradient_m6tk8")
+
+[node name="Gui" type="Control" unique_id=1889157752]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gradient" type="TextureRect" parent="." unique_id=718696314]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 200)
+texture = SubResource("GradientTexture2D_anp1u")
+
+[node name="Gradient2" type="TextureRect" parent="." unique_id=1022138849]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -200.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 200)
+texture = SubResource("GradientTexture1D_j1bik")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=233752703]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Name" type="Label" parent="." unique_id=1044095663]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = -220.0
+offset_right = 254.0
+offset_bottom = -175.0
+grow_vertical = 0
+theme = ExtResource("1_hp63c")
+theme_override_font_sizes/font_size = 48
+text = "2steedy"
+
+[node name="Name2" type="Label" parent="." unique_id=1536192710]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -155.5
+offset_top = -31.0
+offset_right = 155.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_hp63c")
+theme_override_font_sizes/font_size = 16
+text = "UNDERGROUND RACING ASSOCIATION"
+
+[node name="Dialogue" type="Label" parent="." unique_id=1113301359]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -163.0
+offset_right = 1050.0
+offset_bottom = -53.0
+grow_vertical = 0
+theme = ExtResource("1_hp63c")
+theme_override_fonts/font = ExtResource("2_hp63c")
+theme_override_font_sizes/font_size = 30
+text = "[i-[insert username] s-s-sama?! I-I knew it was you! W-what are you doing h-here..?"
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1819749618]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -93.0
+offset_right = 25.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_atrfh")
