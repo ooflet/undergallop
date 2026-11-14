@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cww2j6hv8gcot"]
+
+[ext_resource type="AudioStream" uid="uid://du0fapj46qt2g" path="res://audio/bgm/Daisy - 2hollis.mp3" id="1_v2b7k"]
+[ext_resource type="PackedScene" uid="uid://bcyffsjfbtrnr" path="res://scenes/course.tscn" id="2_j5vqi"]
+[ext_resource type="PackedScene" uid="uid://o4v7v3hkihok" path="res://scenes/training_gui.tscn" id="3_oxk6x"]
+
+[node name="Training" type="Node" unique_id=670970529]
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=620360545]
+stream = ExtResource("1_v2b7k")
+autoplay = true
+
+[node name="Course" parent="." unique_id=1368945433 instance=ExtResource("2_j5vqi")]
+
+[node name="Gui" parent="." unique_id=1889157752 instance=ExtResource("3_oxk6x")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=322314448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1823389, 7.350581)

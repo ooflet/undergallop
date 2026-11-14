@@ -18,9 +18,14 @@ boot_splash/stretch_mode=0
 boot_splash/image="uid://dvup4gvxcsmpj"
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*uid://ckojwebjqna25"
+
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 

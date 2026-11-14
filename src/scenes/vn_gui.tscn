@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://dppesghpmvpte"]
 
+[ext_resource type="Script" uid="uid://c8omn22qprang" path="res://libhorsevn/vn_gui.gd" id="1_fx6nn"]
 [ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="1_hp63c"]
 [ext_resource type="FontFile" uid="uid://buee7dwokh4ef" path="res://fonts/helvetica-neue-5/HelveticaNeueRoman.otf" id="2_hp63c"]
+[ext_resource type="Texture2D" uid="uid://bhronddruhskf" path="res://assets/bg/6.png" id="2_l13e8"]
+[ext_resource type="AudioStream" uid="uid://xb4tfql0n8xi" path="res://audio/bgm/Today - 2hollis.mp3" id="2_pmlxh"]
 [ext_resource type="Texture2D" uid="uid://b0ex8ckextpgs" path="res://assets/down.svg" id="3_atrfh"]
+[ext_resource type="Texture2D" uid="uid://di43ausm8yfyp" path="res://assets/2steedy.png" id="3_xqwrw"]
 [ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="4_j1bik"]
+[ext_resource type="Texture2D" uid="uid://bd3gp8hrmk5np" path="res://assets/slimey.png" id="8_xqwrw"]
+[ext_resource type="Texture2D" uid="uid://dve4duttpkioi" path="res://assets/ugra_white.png" id="10_we7eg"]
 
 [sub_resource type="Gradient" id="Gradient_are0y"]
 colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
@@ -15,7 +21,7 @@ fill_to = Vector2(0, 0)
 
 [sub_resource type="Gradient" id="Gradient_m6tk8"]
 offsets = PackedFloat32Array(0, 0.06626506, 0.92771083, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.78431374, 0, 0, 0, 0.78431374, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_j1bik"]
 gradient = SubResource("Gradient_m6tk8")
@@ -29,6 +35,37 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_fx6nn")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=603548318]
+stream = ExtResource("2_pmlxh")
+volume_db = -15.0
+
+[node name="Background" type="TextureRect" parent="." unique_id=1653277721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l13e8")
+expand_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="." unique_id=1315089885]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -248.5
+offset_right = 195.0
+offset_bottom = 248.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xqwrw")
+expand_mode = 1
 
 [node name="Gradient" type="TextureRect" parent="." unique_id=718696314]
 layout_mode = 1
@@ -83,7 +120,7 @@ theme = ExtResource("1_hp63c")
 theme_override_font_sizes/font_size = 48
 text = "2steedy"
 
-[node name="Name2" type="Label" parent="." unique_id=1536192710]
+[node name="Marquee" type="Label" parent="." unique_id=1536192710]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -131,7 +168,7 @@ offset_right = 25.0
 offset_bottom = 35.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_atrfh")
 
 [node name="Pause" type="TextureButton" parent="." unique_id=789442640]
@@ -146,3 +183,145 @@ offset_bottom = 153.0
 grow_horizontal = 0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("4_j1bik")
+
+[node name="OptionButtons" type="Control" parent="." unique_id=1301815997]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="OptionButtons" unique_id=1873092664]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -176.0
+offset_right = 500.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Option1" type="Button" parent="OptionButtons/BoxContainer" unique_id=916997392]
+custom_minimum_size = Vector2(1000, 0)
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+theme = ExtResource("1_hp63c")
+text = "(sigh) alright…get up, champion. Tell your trainer that you’re with me now.
+"
+autowrap_mode = 3
+
+[node name="Option2" type="Button" parent="OptionButtons/BoxContainer" unique_id=427814613]
+custom_minimum_size = Vector2(1000, 0)
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+theme = ExtResource("1_hp63c")
+text = "Hell no, brother, I’m retired asf. Get out of my face."
+autowrap_mode = 3
+
+[node name="Option3" type="Button" parent="OptionButtons/BoxContainer" unique_id=1101952984]
+custom_minimum_size = Vector2(1000, 0)
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+theme = ExtResource("1_hp63c")
+text = "O H M Y G O D. OF COURSE I’LL TRAIN YOU 2STEEDY CHAN! I’LL MAKE YOU THE BEST UG RACER ON THIS PLANET! o(≧口≦)o
+"
+autowrap_mode = 3
+
+[node name="Option4" type="Button" parent="OptionButtons/BoxContainer" unique_id=1267273301]
+custom_minimum_size = Vector2(1000, 0)
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+theme = ExtResource("1_hp63c")
+text = "…"
+autowrap_mode = 3
+
+[node name="NamePicker" type="ColorRect" parent="." unique_id=1626966626]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="NamePicker" unique_id=973207716]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -35.0
+offset_right = 51.5
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hp63c")
+theme_override_font_sizes/font_size = 32
+text = "name?"
+
+[node name="LineEdit" type="LineEdit" parent="NamePicker" unique_id=496710538]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 4.5
+offset_right = 150.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="NamePicker" unique_id=1103103354]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 44.5
+offset_right = 150.0
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "ok"
+flat = true
+
+[node name="slimey" type="TextureRect" parent="." unique_id=566454973]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -250.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("8_xqwrw")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1503579828]
+modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 537.0
+offset_bottom = 281.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_we7eg")

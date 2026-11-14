@@ -1,0 +1,70 @@
+{
+  "event_chance": 0.4,
+  "_effects_reference": "train_pct (add) | train_pct_set | mood (delta) | mood_set | tired_or_dead | stat_pct | flowers | checkpoint",
+
+  "events": [
+	{
+	  "id": "needle_in_hay", "weight": 10,
+	  "lines": [
+		{ "t": "narrate", "text": "2steedy eats hay after a long training sesh but finds a needle in his haystack." },
+		{ "t": "say", "who": "2steedy", "face": "pained", "text": "Yewouch!" }
+	  ],
+	  "effects": { "train_pct": -10, "mood": -1 },
+	  "bounce_back": {
+		"lines": [ { "t": "narrate", "text": "Bouncing back: he swallows the needle. More iron!" } ],
+		"effects": { "stat_pct": 15 }
+	  }
+	},
+	{
+	  "id": "archive_jeans", "weight": 8,
+	  "lines": [
+		{ "t": "narrate", "text": "2steedy goes shopping for archive Dior jeans but gets shot in the thigh by jeans that get archive with time." },
+		{ "t": "say", "who": "jtgawt", "text": "Yo, 2steedy, catch this!" },
+		{ "t": "say", "who": "2steedy", "face": "pained", "text": "Yewouch!" }
+	  ],
+	  "effects": { "train_pct": -50, "tired_or_dead": true },
+	  "bounce_back": {
+		"lines": [ { "t": "narrate", "text": "Bounce back: he digests the bullet but still gets lead poisoning anyway." } ],
+		"effects": { "train_pct_set": -20 }
+	  }
+	},
+	{
+	  "id": "ug_lottery", "weight": 1,
+	  "lines": [ { "t": "narrate", "face": "overjoyed", "text": "2steedy wins the UG monthly lottery!" } ],
+	  "effects": { "train_pct": 100, "mood_set": 2 }
+	},
+	{
+	  "id": "healthy_meal", "weight": 10,
+	  "lines": [ { "t": "narrate", "face": "happy", "text": "2steedy eats a healthy meal and gets a good night's rest." } ],
+	  "effects": { "train_pct": 5, "mood": 1 },
+	  "qte": {
+		"chance": 0.35,
+		"prompt": [ { "t": "narrate", "text": "2steedy eats a healthy meal and drifts off to sleep… but something stirs in the dark.", "auto": 1.8 } ],
+		"pass_lines": [ { "t": "narrate", "face": "happy", "text": "He shrugs it off and sleeps like a foal." } ],
+		"fail_lines": [ { "t": "narrate", "face": "pained", "text": "Nightmare! 2steedy wakes up screaming." } ],
+		"fail_effects": { "train_pct": -5, "mood": -1 }
+	  }
+	},
+	{
+	  "id": "flower_trip", "weight": 10,
+	  "lines": [ { "t": "narrate", "face": "pained", "text": "2steedy trips and falls onto his favourite flower." } ],
+	  "effects": { "mood": -1 },
+	  "bounce_back": {
+		"lines": [ { "t": "narrate", "text": "Bounce back: 2steedy plants a new flower." } ],
+		"effects": { "flowers": 1 }
+	  }
+	},
+	{
+	  "id": "arnav_funeral", "weight": 6,
+	  "lines": [ { "t": "narrate", "face": "sad", "text": "Sad news arrives at the stable. Training is off for the day." } ],
+	  "effects": { "train_pct": -100 },
+	  "bounce_back": {
+		"lines": [
+		  { "t": "narrate", "text": "He attends the funeral and watches Arnav ascend." },
+		  { "t": "narrate", "face": "determined", "text": "Watching him move on to a better place fills 2steedy with determination." }
+		],
+		"effects": { "checkpoint": true }
+	  }
+	}
+  ]
+}

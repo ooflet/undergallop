@@ -1,0 +1,121 @@
+{
+  "characters": {
+	"2steedy": { "name": "2steedy" },
+	"jtgawt": { "name": "JTGAWT" }
+  },
+
+  "scenes": {
+
+	"intro": [
+	  { "t": "ask_name", "prompt": "name?" },
+	  { "t": "bgm", "song": "calm" },
+	  { "t": "narrate", "text": "You, the former well-known horse trainer for Osamuzzle, just finished watching the latest UnderGallop practice race, surprised by the results;" },
+	  { "t": "results", "title": "UnderGallop Practice Race", "highlight": 9, "rows": [
+		  "1.   Understables", "2.   Jane Trotter", "3.   Fakemane", "4.   Beuck", "5.   Lucy Baroque",
+		  "6.   Nettstallion", "7.   2hooves", "8.   Racersobased", "9.   Osamuzzle", "10.  2steedy" ] },
+	  { "t": "narrate", "text": "Back in the day, 2steedy was always at the top, a 4-time UnderGallop champion. Just as you're about to leave;" },
+	  { "t": "show", "who": "2steedy", "face": "flustered" },
+	  { "t": "say", "who": "2steedy", "text": "!-{player} s-s-sama?! I-I knew it was you! W-what are you doing h-here..?" },
+
+	  { "t": "choice", "options": [
+		{ "text": "I saw there was a practice race and wanted to watch it like the old days. What's going on?",
+		  "do": [ { "t": "say", "who": "2steedy", "text": "O-oh, nothing much… It's just…" } ] },
+		{ "text": "I saw you failing and wanted to make fun of you 🤣🤣you fell off,f bro",
+		  "do": [ { "t": "say", "who": "2steedy", "text": "…w-well" } ] },
+		{ "text": "So nice to see you, Steedy-chan!~ What does a silly horsey like you want to talk about with me? ☆*: .｡. o(≧▽≦)o .｡.:*☆",
+		  "do": [ { "t": "blush", "blush_add": 1 } ] },
+		{ "text": "… (say nothing)",
+		  "do": [ { "t": "narrate", "text": "He waits for a response for another second…", "auto": 1.5 },
+				  { "t": "wait", "seconds": 10 } ] }
+	  ] },
+
+	  { "t": "say", "who": "2steedy", "face": "sad", "text": "I…I'm not as good as I used to be, haha…I-I really want to go back to my former glory b-but my new trainer he…he doesn't train me…he doesn't feed me…I-" },
+	  { "t": "narrate", "face": "crying", "text": "He falls to his knees (or whatever horses do), tears streaming down his face as he speaks through rough sobs." },
+	  { "t": "say", "who": "2steedy", "face": "desperate", "text": "P-please {player} sama! I-if I lose another race, t-they'll put me back on a farm for the rest of my life! P-Please train me!" },
+
+	  { "t": "choice", "options": [
+		{ "text": "(sigh) alright…get up, champion. Tell your trainer that you're with me now.",
+		  "do": [ { "t": "say", "who": "2steedy", "face": "hopeful", "text": "R-really?! Y-you mean it?!" } ] },
+		{ "text": "Hell no, brother, I'm retired asf. Get out of my face.",
+		  "do": [ { "t": "blush", "blush": 0 },
+				  { "t": "call", "name": "fake_crash" } ] },
+		{ "text": "O H M Y G O D. OF COURSE I'LL TRAIN YOU 2STEEDY CHAN! I'LL MAKE YOU THE BEST UG RACER ON THIS PLANET! o(≧口≦)o",
+		  "do": [ { "t": "blush", "blush_add": 1 },
+				  { "t": "sfx", "file": "res://assets/sfx/teapot.ogg", "vol": -18 } ] },
+		{ "text": "…",
+		  "do": [ { "t": "wait", "seconds": 10 },
+				  { "t": "blush", "blush_add": -1 } ] }
+	  ] },
+
+	  { "t": "say", "who": "2steedy", "face": "happy", "text": "I…I can't wait…{player} sama…please take care of me…" },
+	  { "t": "goto", "scene": "tutorial" }
+	],
+
+	"tutorial": [
+	  { "t": "comment", "text": "TODO(justin): placeholder tutorial text, rewrite in your own voice!" },
+	  { "t": "narrate", "text": "Each turn, pick a training: Ability, Agility, Mobility & Capacity. It raises that stat, plus a little of a related one." },
+	  { "t": "narrate", "text": "2steedy's mood changes how much he gains. Keep him 2happy and he trains harder. 2tired and he might just wakinda die." },
+	  { "t": "narrate", "text": "Rest to bring his mood back up. It costs a turn, though." },
+	  { "t": "narrate", "text": "Finish the Semi-Demi Finals in the top 3 to advance. Otherwise its joever for 2steedy." },
+	  { "t": "narrate", "text": "Make 2steedy bounce back to stardom" }
+	],
+
+	"dead": [
+	  { "t": "comment", "text": "TODO: placeholder death scene (not in the original script)" },
+	  { "t": "narrate", "text": "2steedy collapses. He is… 2dead." }
+	],
+	"revive_flower": [
+	  { "t": "narrate", "text": "The flower he planted glows faintly. 2steedy gets back up, 2tired but alive! (Flower used)" }
+	],
+	"revive_checkpoint": [
+	  { "t": "narrate", "text": "You rewind to your last checkpoint…" }
+	],
+
+	"race_3rd": [
+	  { "t": "narrate", "face": "relieved", "text": "2steedy runs towards {player} out of breath, but this time not out of embarrassment or sorrow, but not exactly the happiest." },
+	  { "t": "say", "who": "2steedy", "text": "i…I actually did it! I-I'm not last anymore! Th-thank you {player} sama!" },
+	  { "t": "goto", "scene": "post_race_choice" }
+	],
+	"race_2nd": [
+	  { "t": "narrate", "face": "happy", "text": "2steedy runs towards {player}, out of breath, looking up at them but this time not out of embarrassment or sorrow, happier." },
+	  { "t": "say", "who": "2steedy", "text": "i…I actually did it! I-I'm not last anymore! Th-thank you so much {player} sama! I-I couldn't have done it without you!" },
+	  { "t": "goto", "scene": "post_race_choice" }
+	],
+	"race_1st": [
+	  { "t": "narrate", "face": "overjoyed", "text": "2steedy sprints towards {player}, out of breath, looking at them but this time not out of embarrassment or sorrow, the happiest he's ever been." },
+	  { "t": "say", "who": "2steedy", "text": "i…I did it! I-I'm not last anymore! Th-thank you so much {player} sama! I-I couldn't have done it without you!" },
+	  { "t": "goto", "scene": "post_race_choice" }
+	],
+
+	"post_race_choice": [
+	  { "t": "choice", "options": [
+		{ "text": "Heh…don't thank me just yet, 2steedy; we still have to get past the next few races.",
+		  "do": [ { "t": "say", "who": "2steedy", "text": "Y-you're right! L-let's keep going!" } ] },
+		{ "text": "I don't care, bro #skipdialogue",
+		  "do": [ { "t": "say", "who": "2steedy", "text": "…", "auto": 0.8 } ] },
+		{ "text": "Omigawd im so proud of you steedy-chan!~ Let's keep training so we can beat these other plebeian racers and restore your glory! (^///^)",
+		  "do": [ { "t": "blush", "blush_add": 1 },
+				  { "t": "say", "who": "2steedy", "text": "Y-you're r-right! L-let's keep g-going!" } ] },
+		{ "text": "…",
+		  "do": [ { "t": "wait", "seconds": 10 },
+				  { "t": "say", "who": "2steedy", "lock": 10, "text": "L-lets keep training {player} sama…" } ] }
+	  ] }
+	],
+
+	"race_fail": [
+	  { "t": "comment", "text": "TODO: placeholder (not in the original script). The farm threat from the intro." },
+	  { "t": "show", "who": "2steedy", "face": "crushed" },
+	  { "t": "say", "who": "2steedy", "text": "N-no… the farm… I-I'm sorry, {player} sama…" }
+	],
+	"race_flower_retry": [
+	  { "t": "narrate", "text": "2steedy clutches his flower. \"One more try…\" (Flower used)" }
+	],
+	"race_checkpoint_retry": [
+	  { "t": "narrate", "text": "Determination. You head back to your last checkpoint and train again." }
+	],
+
+	"to_be_continued": [
+	  { "t": "narrate", "text": "To be continued… (the next races aren't written yet!)" }
+	]
+  }
+}

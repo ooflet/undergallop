@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://o4v7v3hkihok"]
+
+[ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="2_oubi5"]
+[ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="5_tnvx4"]
+
+[sub_resource type="Gradient" id="Gradient_are0y"]
+colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_anp1u"]
+gradient = SubResource("Gradient_are0y")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_m6tk8"]
+offsets = PackedFloat32Array(0, 0.06626506, 0.92771083, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j1bik"]
+gradient = SubResource("Gradient_m6tk8")
+
+[node name="Gui" type="Control" unique_id=1889157752]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Gradient" type="TextureRect" parent="." unique_id=718696314]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 200)
+texture = SubResource("GradientTexture2D_anp1u")
+
+[node name="Gradient2" type="TextureRect" parent="." unique_id=1022138849]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -200.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(0, 200)
+texture = SubResource("GradientTexture1D_j1bik")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=233752703]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Name2" type="Label" parent="." unique_id=1536192710]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -155.5
+offset_top = -31.0
+offset_right = 155.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_oubi5")
+theme_override_font_sizes/font_size = 16
+text = "UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / "
+
+[node name="Pause" type="TextureButton" parent="." unique_id=789442640]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 153.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_tnvx4")
+
+[node name="OptionButtons" type="Control" parent="." unique_id=1301815997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

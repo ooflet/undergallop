@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://drvp582agtsl8"]
 
+[ext_resource type="AudioStream" uid="uid://2yq1o3ixtva8" path="res://audio/bgm/Nettspend - nothing like uuu (Official Instrumental).mp3" id="1_p6dhs"]
 [ext_resource type="PackedScene" uid="uid://dmlmk3kpgdev2" path="res://scenes/title_gui.tscn" id="1_wosw1"]
 [ext_resource type="PackedScene" uid="uid://bcyffsjfbtrnr" path="res://scenes/course.tscn" id="2_p6dhs"]
 
 [node name="Title" type="Node3D" unique_id=1749780457]
+
+[node name="NettspendNothingLikeUuu(officialInstrumental)" type="AudioStreamPlayer" parent="." unique_id=1804264413]
+stream = ExtResource("1_p6dhs")
+volume_db = -10.0
+autoplay = true
 
 [node name="TitleGui" parent="." unique_id=1232066856 instance=ExtResource("1_wosw1")]
 
