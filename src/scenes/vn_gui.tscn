@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="1_hp63c"]
 [ext_resource type="FontFile" uid="uid://buee7dwokh4ef" path="res://fonts/helvetica-neue-5/HelveticaNeueRoman.otf" id="2_hp63c"]
 [ext_resource type="Texture2D" uid="uid://b0ex8ckextpgs" path="res://assets/down.svg" id="3_atrfh"]
+[ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="4_j1bik"]
 
 [sub_resource type="Gradient" id="Gradient_are0y"]
 colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
@@ -100,6 +101,8 @@ theme_override_font_sizes/font_size = 16
 text = "UNDERGROUND RACING ASSOCIATION"
 
 [node name="Dialogue" type="Label" parent="." unique_id=1113301359]
+custom_minimum_size = Vector2(950, 110)
+custom_maximum_size = Vector2(950, 110)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -115,7 +118,7 @@ theme_override_font_sizes/font_size = 30
 text = "[i-[insert username] s-s-sama?! I-I knew it was you! W-what are you doing h-here..?"
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1819749618]
+[node name="Next" type="TextureRect" parent="." unique_id=1819749618]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -130,3 +133,16 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_atrfh")
+
+[node name="Pause" type="TextureButton" parent="." unique_id=789442640]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 153.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_j1bik")
