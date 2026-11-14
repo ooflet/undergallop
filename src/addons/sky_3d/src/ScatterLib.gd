@@ -1,17 +1,11 @@
-# Copyright (c) 2023-2025 Cory Petkovsek and Contributors
-# Copyright (c) 2021 J. Cuellar
 
 class_name ScatterLib
 
-# Atmospheric Scattering Lib.
-# References:
-# - Preetham and Hoffman Paper:
-# See: https://developer.amd.com/wordpress/media/2012/10/ATI-LightScattering.pdf
 
-const n: float = 1.0003 # Index of the air refraction
-const n2: float = 1.00060009 # Index of the air refraction ˆ 2
-const N: float = 2.545e25 # Molecular Density
-const pn: float = 0.035 # Depolatization factor for standard air.
+const n: float = 1.0003
+const n2: float = 1.00060009
+const N: float = 2.545e25
+const pn: float = 0.035
 
 
 static func compute_wavelenghts_lambda(value: Vector3) -> Vector3:

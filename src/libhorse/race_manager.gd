@@ -1,47 +1,32 @@
+# horse
+
 extends Node3D
-## Spawns the player's horse plus AI opponents on the track loop, runs the race,
-## ranks everyone, and (optionally) provides a chase camera and a tiny HUD.
-##
-## Drop this on a Node3D in your scene, optionally assign `track_mesh`, and press play.
 
 const Racer := preload("horse_racer.gd")
 const Track := preload("track_path.gd")
 
 signal countdown_tick(seconds_left: int)
 signal race_started
-## results: Array of { rank:int, name:String, time:float, is_player:bool, style:String }
 signal race_finished(results: Array)
 
 @export_group("Assets")
-## Defaults to horse_gallop.glb next to this script.
 @export var horse_scene: PackedScene
-## Defaults to track_path.json next to this script.
 @export_file("*.json") var track_json := ""
-## Optional: the node showing track.obj. Its transform (position/rotation/scale) is
-## applied to the racing line so the horses follow your placed/scaled track.
 @export var track_mesh: Node3D
-## Alternative to track_mesh: a node containing the track (e.g. your course.tscn instance).
-## The track MeshInstance3D is found inside it automatically (prefers a node named "track").
 @export var track_root: Node3D
-## Used only when no track mesh is found (the racing line is scaled by this).
 @export var track_scale := 4.0
 @export var track_offset := Vector3.ZERO
 @export var reverse_direction := false
-## Where the start/finish line sits on the loop (0..1 around the track).
 @export_range(0.0, 1.0, 0.001) var start_position := 0.0
 
 @export_group("Race")
 @export var laps := 1
-## Seconds an average horse needs for the whole race.
 @export var race_duration := 20.0
 @export_range(0, 17) var opponents := 7
-## Horses abreast at the gate (extra horses line up in rows behind).
 @export_range(1, 8) var lane_count := 4
 @export var auto_start := true
 @export var start_delay := 3.0
-## 0 = random every time.
 @export var random_seed := 0
-## 0 = weak field, 1 = strong field.
 @export_range(0.0, 1.0, 0.05) var opponent_strength := 0.5
 
 @export_group("Player horse")
@@ -52,22 +37,17 @@ signal race_finished(results: Array)
 @export_range(0.0, 1.0, 0.01) var player_power := 0.6
 @export_range(0.0, 1.0, 0.01) var player_guts := 0.5
 @export_range(0.0, 1.0, 0.01) var player_wisdom := 0.5
-## -1 = random gate.
 @export var player_gate := -1
 
 @export_group("Visuals")
-## Fixed horse size.
 @export var horse_scale := 0.14
 @export var follow_camera := true
 @export_range(30.0, 120.0, 1.0) var camera_fov := 80.0
-## Chase camera distance / height, measured in horse lengths.
 @export var camera_distance := 6.0
 @export var camera_height := 2.2
 @export var show_hud := false
 @export var show_name_tags := true
-## Raises (+) or lowers (-) the horses, in world units.
 @export var horse_height := 0.0
-## Multiplier for the gallop animation speed (1 = normal, 2 = twice as fast).
 @export_range(0.1, 5.0, 0.05) var animation_speed := 1.1
 @export var bank_gain := 1.2
 
@@ -156,9 +136,6 @@ func _find_track_mesh(root: Node) -> Node3D:
 	return biggest
 
 
-# ====================================================================================
-# field creation
-# ====================================================================================
 
 func spawn_default_field() -> void:
 	var lineup: Array[Dictionary] = []
@@ -191,7 +168,6 @@ func spawn_default_field() -> void:
 	spawn_lineup(lineup)
 
 
-## Seeded Fisher-Yates so `random_seed` gives repeatable fields and gates.
 func _shuffle(a: Array) -> void:
 	for i in range(a.size() - 1, 0, -1):
 		var j := _rng.randi_range(0, i)
@@ -204,18 +180,15 @@ func _stat(v: float) -> float:
 	return clampf(v + _rng.randf_range(-0.15, 0.15), 0.15, 0.95)
 
 
-## lineup entries: name, player(bool), style, speed, stamina, power, guts, wisdom, coat, silks
-## Call this yourself (with auto_start off and opponents = 0 ...) to build a custom field.
 func spawn_lineup(lineup: Array[Dictionary]) -> void:
 	var n := lineup.size()
 	var usable := track.width * 0.92
-	var lanes := n  # everyone abreast in one horizontal line, like starting gates
+	var lanes := n
 	var spacing := usable / float(lanes)
-	var scale_v := horse_scale if horse_scale > 0.001 else 0.045  # fixed scale, no auto-fit
+	var scale_v := horse_scale if horse_scale > 0.001 else 0.045
 	var len_w := Racer.MODEL_LENGTH * scale_v
 	var limit := usable * 0.5 - Racer.MODEL_WIDTH * scale_v * 0.5
 
-	# gates: shuffle, but the player may request one
 	var gates: Array[int] = []
 	for i in n:
 		gates.append(i)
@@ -267,14 +240,10 @@ func spawn_lineup(lineup: Array[Dictionary]) -> void:
 		racers.append(r)
 		if r.is_player:
 			player = r
-		# place immediately so the gate looks right before the race starts
 		r.tick(0.0, 0.0)
 	_update_ranks()
 
 
-# ====================================================================================
-# race flow
-# ====================================================================================
 
 func begin_countdown() -> void:
 	_countdown = start_delay
@@ -348,9 +317,6 @@ func _by_rank(a: Racer, b: Racer) -> bool:
 	return a.rank < b.rank
 
 
-# ====================================================================================
-# opponent AI: blocking and lane changes
-# ====================================================================================
 
 func _run_ai(delta: float) -> void:
 	for h in racers:
@@ -360,7 +326,6 @@ func _run_ai(delta: float) -> void:
 		var len_w := h.len_world
 		var wid_w := h.wid_world
 
-		# 1) never drive through the horse in front of us
 		var blocked := false
 		for o in racers:
 			if o == h or o.state == Racer.State.GATE:
@@ -372,7 +337,6 @@ func _run_ai(delta: float) -> void:
 					and o.speed < h.speed * 1.02:
 				blocked = true
 
-		# 2) every ~0.3 s decide about a lane change
 		var t: float = _decision_timers.get(h, _rng.randf() * 0.3) - delta
 		if t <= 0.0:
 			t = 0.25 + _rng.randf() * 0.15
@@ -405,9 +369,6 @@ func _lane_clear(h: Racer, lat: float) -> bool:
 	return true
 
 
-# ====================================================================================
-# camera + HUD
-# ====================================================================================
 
 func _make_camera() -> void:
 	_camera = Camera3D.new()
@@ -424,7 +385,6 @@ func _make_camera() -> void:
 func _update_camera(delta: float) -> void:
 	if _camera == null or player == null:
 		return
-	# Fixed reference size (not horse size) so changing horse_scale visibly changes the horses.
 	var len_w := track.width * 0.32
 	var fwd := player.forward()
 	var focus := player.global_position + Vector3.UP * len_w * 0.3
@@ -442,7 +402,6 @@ func _make_hud() -> void:
 	_hud.add_theme_font_size_override("font_size", 20)
 	_hud.add_theme_color_override("font_outline_color", Color.BLACK)
 	_hud.add_theme_constant_override("outline_size", 6)
-	#layer.add_child(_hud)
 
 
 func _update_hud() -> void:

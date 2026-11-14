@@ -1,7 +1,5 @@
 class_name Race
 extends RefCounted
-## Tiny race simulator: everyone gets a power score with some luck, sorted high to low.
-## Roster order matches the practice-race results in the intro (Understables strongest, Osamuzzle weakest).
 
 const NOISE := 0.08
 const PLAYER_NAME := "2steedy"
@@ -19,7 +17,6 @@ const ROSTER := [
 ]
 
 
-## Returns rows [{name, score, is_player}] sorted best-first. rating_scale makes later stages harder.
 static func run(player_score: float, rating_scale: float = 1.0) -> Array:
 	var rows: Array = [{"name": PLAYER_NAME, "score": player_score * randf_range(1.0 - NOISE, 1.0 + NOISE), "is_player": true}]
 	for r in ROSTER:

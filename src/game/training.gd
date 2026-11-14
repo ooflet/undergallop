@@ -1,7 +1,5 @@
 class_name Training
 extends Node
-## Runs the turn loop: pick a command -> (maybe) a random event plays as a VN scene -> stats change.
-## Events live in data/events.json, so writers can add/edit them without touching code.
 
 const REST_MOOD := 1
 
@@ -28,7 +26,6 @@ func load_events(path: String) -> bool:
 	return true
 
 
-## Runs turns until the stage's turn count is reached. Returns "done" or "dead".
 func run_until_race(stage: Dictionary) -> String:
 	var turns: int = int(stage["turns"])
 	while GameState.turn < turns:
@@ -75,9 +72,6 @@ func _pick_event() -> Dictionary:
 	return events.back()
 
 
-## One event = lines -> effects -> optional bounce_back (lines -> effects).
-## An event with a "qte" block sometimes swaps to its skill-check variant:
-## prompt -> skill check -> pass_lines (base effects) or fail_lines (fail_effects).
 func _play_event() -> void:
 	var ev := _pick_event()
 	ui.hide()

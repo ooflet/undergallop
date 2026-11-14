@@ -1,16 +1,13 @@
+# welcome to hrse brother
+
 extends Node
-## Top-level flow:  intro VN -> [ training turns -> race -> result VN ] per stage.
-## Builds its own layers, so main.tscn is just a Node with this script.
 
 const STAGES := [
 	{"name": "Semi-Demi Finals", "turns": 12, "rating_scale": 1.0, "pass_top": 3},
-	# add more: {"name": "Demi Finals", "turns": 12, "rating_scale": 1.12, "pass_top": 3},
 ]
 const RESULT_SCENES := {1: "race_1st", 2: "race_2nd", 3: "race_3rd"}
 
-## Testing: skips the unskippable 10-second gag waits.
 @export var debug_skip_gags := false
-## true = the "Hell no" choice really closes the game (per the script). false = restarts instead.
 @export var fake_crash_really_quits := true
 
 var gui: VNGui
@@ -72,7 +69,7 @@ func _ready() -> void:
 
 
 func _run_game() -> void:
-	await runner.play("intro")  # includes the tutorial
+	await runner.play("intro")
 	gui.hide_portrait()
 	for stage in STAGES:
 		await _run_stage(stage)
@@ -83,7 +80,7 @@ func _run_game() -> void:
 func _run_stage(stage: Dictionary) -> void:
 	GameState.turn = 0
 	GameState.save_checkpoint()
-	var race_only := false  # true right after a flower retry: skip straight back to the race
+	var race_only := false
 	while true:
 		if not race_only:
 			gui.hide()
@@ -149,7 +146,6 @@ func _fake_crash(_args: Variant) -> void:
 		get_tree().reload_current_scene()
 
 
-# ---------------------------------------------------------------- pause menu
 func _build_pause_menu() -> void:
 	var layer := CanvasLayer.new()
 	layer.layer = 30

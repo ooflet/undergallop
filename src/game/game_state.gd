@@ -1,6 +1,4 @@
 extends Node
-## AUTOLOAD this as "GameState"  (Project > Project Settings > Globals > Autoload).
-## Holds everything that makes a "run" what it is: stats, mood, flowers, checkpoint.
 
 signal stats_changed
 signal mood_changed
@@ -10,26 +8,24 @@ const STATS := ["speed", "stamina", "power", "guts", "wit"]
 const STAT_LABELS := {"speed": "Speed", "stamina": "Stamina", "power": "Power", "guts": "Guts", "wit": "Wit"}
 const START_STATS := {"speed": 18.0, "stamina": 18.0, "power": 18.0, "guts": 14.0, "wit": 14.0}
 
-## Training a stat also gives a smaller bonus to a second one.
 const SECONDARY := {"speed": "power", "stamina": "guts", "power": "stamina", "guts": "power", "wit": "speed"}
 const BASE_GAIN := 12.0
 const SECONDARY_GAIN := 4.0
 
-## How much each stat counts in a race. (Tuned so a good run reaches top 3 ~65% of the time.)
 const RACE_WEIGHTS := {"speed": 1.0, "stamina": 0.9, "power": 0.9, "guts": 0.8, "wit": 0.7}
 
 const MOOD_MIN := -2
 const MOOD_MAX := 2
-const MOOD_LABELS := {-2: "2tired", -1: "2meh", 0: "2chill", 1: "2good", 2: "2happy"}  # rename freely
-const MOOD_TRAIN_PCT := 10   # each mood level = +/-10% training gains, +/-3% race power
+const MOOD_LABELS := {-2: "2tired", -1: "2meh", 0: "2chill", 1: "2good", 2: "2happy"}
+const MOOD_TRAIN_PCT := 10
 
 var player_name := "Trainer"
 var stats: Dictionary = {}
 var mood := 0
-var dead := false             # "2dead"
-var flowers := 0              # extra lives
+var dead := false
+var flowers := 0
 var turn := 0
-var session_pct := 0          # % modifier on the training session currently being resolved
+var session_pct := 0
 var flags: Dictionary = {}
 var checkpoint: Dictionary = {}
 
@@ -77,7 +73,6 @@ func race_score() -> float:
 	return total * (1.0 + 0.03 * mood)
 
 
-# ---------------------------------------------------------------- checkpoints
 func snapshot() -> Dictionary:
 	return {"stats": stats.duplicate(), "mood": mood, "flowers": flowers, "turn": turn, "flags": flags.duplicate(true)}
 
@@ -102,10 +97,6 @@ func load_checkpoint() -> bool:
 	return true
 
 
-# ---------------------------------------------------------------- event effects
-## Applies an "effects" block from events.json. Returns short text notes for the player.
-## Keys: train_pct (add) | train_pct_set | mood (delta) | mood_set | tired_or_dead |
-##       stat_pct (all stats +%) | flowers (+n) | checkpoint (true)
 func apply_effects(fx: Dictionary) -> Array:
 	var notes: Array = []
 	if fx.has("train_pct_set"):

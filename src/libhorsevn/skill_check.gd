@@ -1,7 +1,5 @@
 class_name SkillCheck
 extends Control
-## Timing QTE: a marker sweeps back and forth, press Space/Enter/click while it's in the green zone.
-## Usage:  var c := SkillCheck.new(); layer.add_child(c); c.start(); var ok: bool = await c.finished
 
 signal finished(success: bool)
 
@@ -29,7 +27,7 @@ func start() -> void:
 	_title.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	_title.offset_top = 300
 	_title.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	await get_tree().create_timer(0.35, false).timeout  # grace period so a stray click doesn't fail it
+	await get_tree().create_timer(0.35, false).timeout
 	_armed = true
 
 

@@ -1,17 +1,14 @@
 class_name StoryRunner
 extends Node
-## Plays scenes from data/story.json (and event line-lists from events.json) on a VNGui.
-## A scene is an array of command dictionaries. See README for the full command list.
 
 var gui: VNGui
 var data: Dictionary = {}
-## Named game-side functions a script can trigger with {"t":"call","name":"..."}
 var hooks: Dictionary = {}
 
 var _abort := false
 var _jump := ""
 
-
+# load a story no wayyy
 func load_story(path: String) -> bool:
 	var f := FileAccess.open(path, FileAccess.READ)
 	if f == null:
@@ -24,17 +21,17 @@ func load_story(path: String) -> bool:
 	data = parsed
 	return true
 
-
 func play(scene_id: String) -> void:
 	var scenes: Dictionary = data.get("scenes", {})
 	if not scenes.has(scene_id):
+		# i did a fuckup
 		push_error("Unknown scene: " + scene_id)
 		return
 	_abort = false
 	_jump = ""
 	await run_commands(scenes[scene_id])
 	_abort = false
-	gui.set_blush(0)  # blush lasts "for the rest of this dialogue"
+	gui.set_blush(0)
 	if _jump != "":
 		var next := _jump
 		_jump = ""
@@ -42,6 +39,7 @@ func play(scene_id: String) -> void:
 
 
 func run_commands(cmds: Array) -> void:
+	#idk why this is here
 	for c in cmds:
 		if _abort:
 			return
@@ -93,6 +91,7 @@ func _run(c: Dictionary) -> void:
 			if h is Callable:
 				await (h as Callable).call(c.get("args", []))
 			else:
+				# someone else did a fuckup lol
 				push_warning("No hook named '%s'" % str(c.get("name", "")))
 		"goto":
 			_jump = str(c.get("scene", ""))
@@ -100,12 +99,11 @@ func _run(c: Dictionary) -> void:
 		"end":
 			_abort = true
 		"comment":
-			pass  # notes for the writers; ignored at runtime
+			pass
 		_:
 			push_warning("Unknown story command: " + JSON.stringify(c))
 
 
-## Optional per-line extras: "face": "crying", "blush": 2 (absolute), "blush_add": 1
 func _visuals(c: Dictionary) -> void:
 	if c.has("face"):
 		gui.set_expression(str(c["face"]))

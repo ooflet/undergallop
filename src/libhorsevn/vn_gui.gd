@@ -1,10 +1,7 @@
+# please KILL ME ITS 4 IN THE MORNING and im working on THIS BULLSHIT
+
 class_name VNGui
 extends Control
-## Presentation layer. Attached to the root "Gui" node of vn_gui.tscn.
-## Everything that takes player time is a coroutine:  await gui.say("2steedy", "H-hi!")
-## Nodes it expects from your scene: Name, Dialogue, Next, Pause, Marquee,
-## OptionButtons/BoxContainer/Option1..N (choices) and NamePicker (Label, LineEdit, Button).
-## It still builds the portrait, results board and image overlay itself.
 
 signal pause_pressed
 signal _advance
@@ -14,33 +11,22 @@ signal _text_done(value: String)
 const NARRATION_COLOR := Color(0.78, 0.82, 0.92)
 const MAX_BLUSH := 3
 
-## Blip played while text types out. Leave empty for no sound.
 @export var talk_sfx: AudioStream
 @export var talk_volume_db := 0
-## Play a blip every N characters (1 = every letter, 2-3 sounds less buzzy).
 @export var talk_every := 2
-## Random pitch range so it doesn't sound robotic.
 @export var talk_pitch_min := 0.9
 @export var talk_pitch_max := 1.1
 
 var _talk_player: AudioStreamPlayer
 
-## Extra pause (seconds) after each dot of an ellipsis ("..." or "…").
 @export var ellipsis_pause := 0.25
-## Extra pause (seconds) after a dash ("—", "–", "--", or " - ").
 @export var dash_pause := 0.25
-## Small pause (seconds) on the hyphen of a repeated-letter stutter ("i-i", "H-hi", "s-sorry").
 @export var stutter_pause := 0.25
 
 @export var chars_per_second := 45.0
-## Multiplies every unskippable "gag" wait (the 10-second dot boxes). 0 = no waiting, handy for testing.
 @export var gag_wait_scale := 1.0
-## Portraits are looked up as  <portrait_dir>/<character>/<expression>.png
-## and, if present, <expression>_blush1.png ... _blush3.png for blush levels.
 @export var portrait_dir := "res://assets/characters"
-## Marquee scroll speed in pixels per second.
 @export var marquee_speed := 60.0
-## Choice animation: how far each option rises from, how long it takes, and the delay between options.
 @export var option_rise := 60.0
 @export var option_time := 0.35
 @export var option_stagger := 0.12
@@ -86,7 +72,6 @@ func _ready() -> void:
 	name_ok.pressed.connect(func(): _text_done.emit(name_edit.text))
 	await get_tree().process_frame
 	_start_marquee()
-	# gentle bobbing on the "next" arrow
 	var y := next_icon.position.y
 	var t := create_tween().set_loops()
 	t.tween_property(next_icon, "position:y", y + 8.0, 0.5).set_trans(Tween.TRANS_SINE)
@@ -103,8 +88,7 @@ func _play_talk() -> void:
 		return
 	_talk_player.pitch_scale = randf_range(talk_pitch_min, talk_pitch_max)
 	_talk_player.play()
-	
-## Returns how long to hold after revealing text[idx] (0 = no extra pause).
+
 func _pause_for(text: String, idx: int) -> float:
 	var ch := text[idx]
 	var prev := text[idx - 1] if idx > 0 else ""
@@ -113,23 +97,17 @@ func _pause_for(text: String, idx: int) -> float:
 		"…":
 			return ellipsis_pause * 3.0
 		".":
-			# only dots that are part of a run ("..", "..."), not normal full stops
 			if prev == "." or next == ".":
 				return ellipsis_pause
 		"—", "–":
 			return dash_pause
 		"-":
-			# "--" or a spaced dash like "wait - what"
 			if prev == "-" or next == "-" or (prev == " " and next == " "):
 				return dash_pause * 0.5
-			# stutter: the letter before and after the hyphen match ("i-i", "H-hi", "s-sorry")
 			if prev != "" and next != "" and prev.to_lower() == next.to_lower() and prev.to_lower() != prev.to_upper():
 				return stutter_pause
 	return 0.0
 
-# =============================================================== dialogue
-## speaker "" = narration (name tag hidden, soft colour).
-## opts: lock (seconds the player can't advance), auto (seconds, then advances itself)
 func say(speaker: String, text: String, opts: Dictionary = {}) -> void:
 	_set_speaker(speaker)
 	dialogue.text = text
@@ -152,7 +130,7 @@ func say(speaker: String, text: String, opts: Dictionary = {}) -> void:
 
 	var lock: float = float(opts.get("lock", 0.0)) * gag_wait_scale
 	if lock > 0.0:
-		await _wait(lock)  # clicks are ignored here: neither _typing nor _waiting is set
+		await _wait(lock)
 	var auto: float = float(opts.get("auto", 0.0))
 	if auto > 0.0:
 		await _wait(auto)
@@ -164,7 +142,6 @@ func say(speaker: String, text: String, opts: Dictionary = {}) -> void:
 	next_icon.hide()
 
 
-## The "he waits for a response..." gag: an unskippable box that keeps adding dots.
 func wait_dots(seconds: float, speaker: String = "") -> void:
 	_set_speaker(speaker)
 	next_icon.hide()
@@ -178,8 +155,6 @@ func wait_dots(seconds: float, speaker: String = "") -> void:
 		dialogue.text += ".  "
 
 
-## Uses the Option buttons from the scene (extra ones are cloned from the last slot if a choice
-## has more options than the scene has buttons). Each option rises into place one after another.
 func choose(options: Array) -> int:
 	next_icon.hide()
 	var buttons: Array[Button] = []
@@ -194,7 +169,7 @@ func choose(options: Array) -> int:
 			extras.append(b)
 		if i < options.size():
 			b.text = str(options[i])
-			b.modulate.a = 0.0  # invisible until its turn, so there's no flicker while layout settles
+			b.modulate.a = 0.0
 			b.show()
 			buttons.append(b)
 		else:
@@ -207,8 +182,6 @@ func choose(options: Array) -> int:
 		conns.append(cb)
 
 	option_buttons.show()
-	# let the BoxContainer lay everything out (autowrap can need a second pass)
-	# before we read the final positions
 	await get_tree().process_frame
 	await get_tree().process_frame
 
@@ -246,7 +219,6 @@ func ask_text(prompt: String, default_text: String = "") -> String:
 	return result
 
 
-## rows are plain strings, e.g. "1.  Understables". highlight = index to tint gold (-1 = none).
 func show_results(title: String, rows: Array, highlight: int = -1) -> void:
 	var panel := PanelContainer.new()
 	panel.theme = name_label.theme
@@ -270,11 +242,9 @@ func show_results(title: String, rows: Array, highlight: int = -1) -> void:
 			l.add_theme_color_override("font_color", Color(1.0, 0.85, 0.3))
 		box.add_child(l)
 	panel.add_child(box)
-	# CenterContainer keeps the panel centred whatever size it ends up (the old anchor/grow
-	# approach depended on layout timing and could land off-centre)
 	var holder := CenterContainer.new()
 	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE  # so clicking the board still advances
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(holder)
 	holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	holder.add_child(panel)
@@ -286,7 +256,6 @@ func show_results(title: String, rows: Array, highlight: int = -1) -> void:
 	holder.queue_free()
 
 
-# =============================================================== portrait / blush
 const CHEEK_POSITIONS := [Vector2(0.175, 0.175), Vector2(0.35, 0.175)]
 const CHEEK_SIZE := Vector2(90, 60)
 const BLUSH_COLOR := Color(1.0, 0.3, 0.4)
@@ -305,7 +274,6 @@ func _make_cheek_texture() -> GradientTexture2D:
 	t.height = 128
 	return t
 
-# =============================================================== images & sound
 func show_image(path: String) -> void:
 	if path == "slimey":
 		$slimey.visible = true
@@ -333,7 +301,6 @@ func play_sfx(path: String, volume_db: float = 0.0) -> void:
 func play_bgm(song: String) -> void:
 	$BGM.play()
 
-# =============================================================== input
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
 	if mb and mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
@@ -353,7 +320,6 @@ func _on_advance_input() -> void:
 		_advance.emit()
 
 
-# =============================================================== internals
 func _wait(seconds: float) -> void:
 	await get_tree().create_timer(seconds, false).timeout
 
@@ -367,8 +333,6 @@ func _set_speaker(display: String) -> void:
 		dialogue.remove_theme_color_override("font_color")
 
 
-## Seamless loop: the text is repeated until it covers the screen plus one extra period, then slid
-## left by exactly one period and snapped back, so the jump is invisible.
 func _start_marquee() -> void:
 	var unit := marquee.text
 	if unit.strip_edges() == "":
@@ -378,7 +342,7 @@ func _start_marquee() -> void:
 	var unit_w := font.get_string_size(unit, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
 	if unit_w <= 0.0:
 		return
-	marquee.set_anchors_preset(Control.PRESET_BOTTOM_LEFT, true)  # keep its current spot, anchor it left
+	marquee.set_anchors_preset(Control.PRESET_BOTTOM_LEFT, true)
 	marquee.grow_horizontal = Control.GROW_DIRECTION_END
 	marquee.text = unit.repeat(ceili(get_viewport_rect().size.x / unit_w) + 1)
 	marquee.reset_size()
@@ -411,34 +375,28 @@ func _play_fx() -> void:
 	_portrait.pivot_offset = Vector2(_portrait.size.x * 0.5, _portrait.size.y)
 	match _expression:
 		"crying", "sad":
-			# slow squish up/down plus a little sob bounce
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "scale", Vector2(1.04, 0.93), 0.45).set_trans(Tween.TRANS_SINE)
 			_fx_tween.tween_property(_portrait, "scale", Vector2(0.98, 1.02), 0.45).set_trans(Tween.TRANS_SINE)
 		"happy":
-			# little hops
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "position:y", _portrait_home.y - 18.0, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 			_fx_tween.tween_property(_portrait, "position:y", _portrait_home.y, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 			_fx_tween.tween_interval(0.5)
 		"angry":
-			# fast horizontal shake
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "position:x", 6.0, 0.04)
 			_fx_tween.tween_property(_portrait, "position:x", -6.0, 0.04)
 		"scared":
-			# trembling
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "rotation_degrees", 1.5, 0.05)
 			_fx_tween.tween_property(_portrait, "rotation_degrees", -1.5, 0.05)
 		"embarrassed", "flustered":
-			# wobble side to side
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "rotation_degrees", 3.0, 0.3).set_trans(Tween.TRANS_SINE)
 			_fx_tween.tween_property(_portrait, "rotation_degrees", -3.0, 0.6).set_trans(Tween.TRANS_SINE)
 			_fx_tween.tween_property(_portrait, "rotation_degrees", 0.0, 0.3).set_trans(Tween.TRANS_SINE)
 		_:
-			# neutral: gentle breathing so he isn't a statue
 			_fx_tween = create_tween().set_loops()
 			_fx_tween.tween_property(_portrait, "scale", Vector2(1.0, 1.015), 1.4).set_trans(Tween.TRANS_SINE)
 			_fx_tween.tween_property(_portrait, "scale", Vector2.ONE, 1.4).set_trans(Tween.TRANS_SINE)
@@ -472,7 +430,6 @@ func add_blush(delta: int) -> void:
 
 
 func _load_portrait_texture() -> void:
-	# one image per character: assets/characters/<id>.png  (falls back to <id>/neutral.png)
 	var tex: Texture2D = null
 	for p in ["%s/%s.png" % [portrait_dir, _char_id], "%s/%s/neutral.png" % [portrait_dir, _char_id]]:
 		if ResourceLoader.exists(p):
@@ -508,7 +465,6 @@ func _build_extras() -> void:
 		c.offset_top = -CHEEK_SIZE.y * 0.5
 		c.offset_bottom = CHEEK_SIZE.y * 0.5
 
-	# full-screen image (jumpscare etc.), always on top
 	_image_layer = ColorRect.new()
 	_image_layer.color = Color.BLACK
 	_image_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE

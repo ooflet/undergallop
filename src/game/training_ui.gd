@@ -1,7 +1,5 @@
 class_name TrainingUI
 extends Control
-## The between-races screen: stat bars on the left, command buttons on the right.
-## Built in code so there's no extra scene to maintain; restyle it however you like.
 
 signal command_chosen(command: String)
 

@@ -1,5 +1,3 @@
-# Copyright (c) 2023-2025 Cory Petkovsek and Contributors
-# Copyright (c) 2021 J. Cuellar
 
 @tool
 extends EditorPlugin
