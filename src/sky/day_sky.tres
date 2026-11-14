@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dh6ykun8bv60u"]
+
+[ext_resource type="Shader" uid="uid://dmmqdhhps05uq" path="res://sky/stylized_sky.gdshader" id="1_i5n5i"]
+
+[resource]
+shader = ExtResource("1_i5n5i")
+shader_parameter/sky_color = Color(0, 0.6, 1, 1)

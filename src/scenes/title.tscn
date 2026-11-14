@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://drvp582agtsl8"]
+
+[ext_resource type="PackedScene" uid="uid://dmlmk3kpgdev2" path="res://scenes/title_gui.tscn" id="1_wosw1"]
+[ext_resource type="PackedScene" uid="uid://bcyffsjfbtrnr" path="res://scenes/course.tscn" id="2_p6dhs"]
+
+[node name="Title" type="Node3D" unique_id=1749780457]
+
+[node name="TitleGui" parent="." unique_id=1232066856 instance=ExtResource("1_wosw1")]
+
+[node name="Node3D" parent="." unique_id=1368945433 instance=ExtResource("2_p6dhs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09589577, 0, 1.7373049)
