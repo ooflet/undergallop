@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/commentary.mp3-3bd97ac55861c60b42283f39840d75
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

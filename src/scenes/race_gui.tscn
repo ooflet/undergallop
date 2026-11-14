@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://chb41gn4tpyl3"]
 
 [ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="1_bujbo"]
+[ext_resource type="Script" uid="uid://dhfdjmp2ndv00" path="res://gui/race_gui.gd" id="1_sto77"]
 [ext_resource type="Texture2D" uid="uid://dve4duttpkioi" path="res://assets/ugra_white.png" id="2_buknr"]
 [ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="3_buknr"]
 
@@ -21,6 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_sto77")
 
 [node name="Gradient" type="TextureRect" parent="." unique_id=718696314]
 layout_mode = 1

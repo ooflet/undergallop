@@ -290,12 +290,18 @@ func _update_transform(delta: float) -> void:
 	var s := start_s + distance
 	var ground := track.position_at(s, lateral) + Vector3.UP * height_offset
 	var ahead := track.position_at(s + maxf(len_world * 0.6, 0.001), lateral)
-	var dir := (ahead - ground).normalized()
+	var dir := ahead - ground
+	dir.y = 0.0                      # flatten: no pitch from track slope
+	dir = dir.normalized()
 	var right := track.right_at(s)
+	right.y = 0.0
+	right = right.normalized()
 
 	var heading := dir
 	if speed > base_speed * 0.05:
-		heading = (dir * speed + right * _lateral_vel).normalized()
+		heading = (dir * speed + right * _lateral_vel)
+		heading.y = 0.0
+		heading = heading.normalized()
 	if _heading == Vector3.ZERO:
 		_heading = heading
 	else:

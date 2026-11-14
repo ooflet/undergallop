@@ -2,6 +2,10 @@
 
 extends Node
 
+const TRAINING_SCENE := "res://scenes/training.tscn"
+const RACE_SCENE := "res://scenes/race.tscn"
+const EVENTS_PATH := "res://data/events.json"
+
 const STAGES := [
 	{"name": "Semi-Demi Finals", "turns": 12, "rating_scale": 1.0, "pass_top": 3},
 ]
@@ -11,15 +15,15 @@ const RESULT_SCENES := {1: "race_1st", 2: "race_2nd", 3: "race_3rd"}
 @export var fake_crash_really_quits := true
 
 var gui: VNGui
-var ui: TrainingUI
 var runner: StoryRunner
-var training: Training
+var _scene_layer: CanvasLayer
 var _pause_panel: PanelContainer
 
 
 func _ready() -> void:
 	GameState.reset_run()
 
+	# background (behind everything)
 	var bg_layer := CanvasLayer.new()
 	bg_layer.layer = -1
 	add_child(bg_layer)
@@ -28,38 +32,24 @@ func _ready() -> void:
 	bg_layer.add_child(bg)
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
-	var ui_layer := CanvasLayer.new()
-	ui_layer.layer = 5
-	add_child(ui_layer)
-	ui = TrainingUI.new()
-	ui_layer.add_child(ui)
-	ui.hide()
+	# training.tscn / race.tscn are spawned in here, one at a time
+	_scene_layer = CanvasLayer.new()
+	_scene_layer.layer = 5
+	add_child(_scene_layer)
 
+	# visual novel layer (persistent, always on top of the spawned scenes)
 	var vn_layer := CanvasLayer.new()
 	vn_layer.layer = 10
 	add_child(vn_layer)
 	gui = (load("res://scenes/vn_gui.tscn") as PackedScene).instantiate() as VNGui
 	gui.gag_wait_scale = 0.0 if debug_skip_gags else 1.0
 	vn_layer.add_child(gui)
-	ui.theme = gui.name_label.theme
-
-	var qte_layer := CanvasLayer.new()
-	qte_layer.layer = 20
-	add_child(qte_layer)
 
 	runner = StoryRunner.new()
 	runner.gui = gui
 	runner.hooks = {"fake_crash": _fake_crash}
 	add_child(runner)
 	runner.load_story("res://data/story.json")
-
-	training = Training.new()
-	training.gui = gui
-	training.runner = runner
-	training.ui = ui
-	training.qte_layer = qte_layer
-	add_child(training)
-	training.load_events("res://data/events.json")
 
 	_build_pause_menu()
 	gui.pause_pressed.connect(_toggle_pause)
@@ -68,6 +58,7 @@ func _ready() -> void:
 	_run_game()
 
 
+# =============================================================== flow
 func _run_game() -> void:
 	await runner.play("intro")
 	gui.hide_portrait()
@@ -83,18 +74,15 @@ func _run_stage(stage: Dictionary) -> void:
 	var race_only := false
 	while true:
 		if not race_only:
-			gui.hide()
-			ui.show()
-			var outcome: String = await training.run_until_race(stage)
+			var outcome = await _run_training(stage)
 			if outcome == "dead":
 				await _handle_death()
 				continue
 		race_only = false
 
-		ui.hide()
-		gui.show()
 		if await _run_race(stage):
 			return
+		gui.show()
 		await runner.play("race_fail")
 		if GameState.flowers > 0:
 			GameState.flowers -= 1
@@ -105,9 +93,30 @@ func _run_stage(stage: Dictionary) -> void:
 			await runner.play("race_checkpoint_retry")
 
 
+## Spawns training.tscn, waits for it to finish, frees it. Returns "race" or "dead".
+func _run_training(stage: Dictionary):
+	gui.hide()
+	var t := _spawn(TRAINING_SCENE, {
+		"gui": gui,
+		"runner": runner,
+		"theme": gui.name_label.theme,
+		"events_path": EVENTS_PATH,
+	}) as TrainingScene
+	#var outcome: String = await t.run(stage)
+	t.queue_free()
+	#return outcome
+
+
+## Spawns race.tscn, plays the race, then shows results through the VN.
+## Returns true if the player placed high enough to pass the stage.
 func _run_race(stage: Dictionary) -> bool:
+	gui.hide()
+	var r := _spawn(RACE_SCENE, {"theme": gui.name_label.theme}) as RaceScene
+	var rows: Array = await r.run(GameState.race_score(), float(stage["rating_scale"]))
+	r.queue_free()
+
+	gui.show()
 	await gui.say("", "The %s begin..." % str(stage["name"]), {"auto": 1.5})
-	var rows := Race.run(GameState.race_score(), float(stage["rating_scale"]))
 	var place := Race.placement(rows)
 	var lines: Array = []
 	for i in rows.size():
@@ -122,7 +131,6 @@ func _run_race(stage: Dictionary) -> bool:
 
 
 func _handle_death() -> void:
-	ui.hide()
 	gui.show()
 	gui.show_portrait("2steedy", "dead")
 	await runner.play("dead")
@@ -135,6 +143,18 @@ func _handle_death() -> void:
 		GameState.load_checkpoint()
 		await runner.play("revive_checkpoint")
 	gui.hide_portrait()
+
+
+# =============================================================== helpers
+## Instantiates a scene, assigns properties BEFORE add_child (so the scene's own _ready()
+## can already use them), and parents it to the scene layer.
+func _spawn(path: String, props: Dictionary = {}) -> Node:
+	var n := (load(path) as PackedScene).instantiate()
+	for key in props:
+		n.set(key, props[key])
+	_scene_layer.add_child(n)
+	return n
+
 
 func _fake_crash(_args: Variant) -> void:
 	gui.show_image("slimey")

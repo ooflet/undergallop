@@ -1,7 +1,15 @@
-[gd_scene format=3 uid="uid://o4v7v3hkihok"]
+[gd_scene format=3 uid="uid://bi732jkefyr0g"]
 
 [ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="2_oubi5"]
 [ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="5_tnvx4"]
+[ext_resource type="Texture2D" uid="uid://dve4duttpkioi" path="res://assets/ugra_white.png" id="10_we7eg"]
+
+[sub_resource type="Gradient" id="Gradient_top"]
+colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_top"]
+gradient = SubResource("Gradient_top")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_are0y"]
 colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
@@ -18,6 +26,73 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_j1bik"]
 gradient = SubResource("Gradient_m6tk8")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_barbg"]
+bg_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_energy"]
+bg_color = Color(0.78, 0.95, 0.35, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_speed"]
+bg_color = Color(0.3, 0.62, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_stamina"]
+bg_color = Color(1, 0.55, 0.28, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_power"]
+bg_color = Color(1, 0.82, 0.25, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_guts"]
+bg_color = Color(1, 0.48, 0.68, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_wit"]
+bg_color = Color(0.38, 0.86, 0.58, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="Gui" type="Control" unique_id=1889157752]
 layout_mode = 3
 anchors_preset = 15
@@ -27,6 +102,17 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_oubi5")
+
+[node name="TopGradient" type="TextureRect" parent="." unique_id=263693351]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_top")
 
 [node name="Gradient" type="TextureRect" parent="." unique_id=718696314]
 layout_mode = 1
@@ -38,6 +124,7 @@ offset_top = -200.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(0, 200)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_anp1u")
 
 [node name="Gradient2" type="TextureRect" parent="." unique_id=1022138849]
@@ -54,6 +141,7 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(0, 200)
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_j1bik")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=233752703]
@@ -66,6 +154,7 @@ offset_top = -200.0
 offset_bottom = -198.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Name2" type="Label" parent="." unique_id=1536192710]
@@ -85,7 +174,758 @@ theme = ExtResource("2_oubi5")
 theme_override_font_sizes/font_size = 16
 text = "UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / "
 
+[node name="Logo" type="TextureRect" parent="." unique_id=985032902]
+modulate = Color(1, 1, 1, 0.39215687)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 537.0
+offset_bottom = 281.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 2
+texture = ExtResource("10_we7eg")
+
+[node name="Header" type="PanelContainer" parent="." unique_id=1853133715]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 170.0
+offset_top = 25.0
+offset_right = -120.0
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBox" type="HBoxContainer" parent="Header" unique_id=1519148745]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="Goal" type="VBoxContainer" parent="Header/HBox" unique_id=1293597502]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="TurnLabel" type="Label" parent="Header/HBox/Goal" unique_id=1870490023]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 14
+text = "TURN 1 / 12"
+
+[node name="GoalLabel" type="Label" parent="Header/HBox/Goal" unique_id=1521582031]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "SEMI-DEMI FINALS IN 12 TURNS"
+
+[node name="Energy" type="VBoxContainer" parent="Header/HBox" unique_id=1514226090]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="EnergyRow" type="HBoxContainer" parent="Header/HBox/Energy" unique_id=1256191792]
+layout_mode = 2
+
+[node name="EnergyTitle" type="Label" parent="Header/HBox/Energy/EnergyRow" unique_id=1936825822]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 14
+text = "ENERGY"
+
+[node name="EnergyValue" type="Label" parent="Header/HBox/Energy/EnergyRow" unique_id=1834836408]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100 / 100"
+
+[node name="EnergyBar" type="ProgressBar" parent="Header/HBox/Energy" unique_id=379791667]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_energy")
+value = 100.0
+show_percentage = false
+
+[node name="Mood" type="VBoxContainer" parent="Header/HBox" unique_id=983945786]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="MoodTitle" type="Label" parent="Header/HBox/Mood" unique_id=1568946998]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 14
+text = "MOOD"
+
+[node name="MoodPill" type="Panel" parent="Header/HBox/Mood" unique_id=1198272222]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pill")
+
+[node name="MoodLabel" type="Label" parent="Header/HBox/Mood/MoodPill" unique_id=183752788]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 18
+text = "2steady"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mod" type="VBoxContainer" parent="Header/HBox" unique_id=1412501442]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="ModTitle" type="Label" parent="Header/HBox/Mod" unique_id=1427120513]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_font_sizes/font_size = 14
+text = "TRAINING PROGRESS"
+
+[node name="ModValue" type="Label" parent="Header/HBox/Mod" unique_id=1073300117]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "+0%"
+
+[node name="Stats" type="PanelContainer" parent="." unique_id=110830786]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 170.0
+offset_top = 105.0
+offset_right = -120.0
+offset_bottom = 185.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBox" type="HBoxContainer" parent="Stats" unique_id=993063906]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Speed" type="VBoxContainer" parent="Stats/HBox" unique_id=523299148]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="SpeedName" type="Label" parent="Stats/HBox/Speed" unique_id=506442704]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.62, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "SPEED"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="Stats/HBox/Speed" unique_id=1105870069]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SpeedRank" type="Label" parent="Stats/HBox/Speed/Row" unique_id=1280752799]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "G"
+
+[node name="SpeedValue" type="Label" parent="Stats/HBox/Speed/Row" unique_id=1119443939]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="SpeedGain" type="Label" parent="Stats/HBox/Speed/Row" unique_id=949610908]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 1, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0"
+
+[node name="SpeedBar" type="ProgressBar" parent="Stats/HBox/Speed" unique_id=1397711042]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_speed")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Stamina" type="VBoxContainer" parent="Stats/HBox" unique_id=166426977]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="StaminaName" type="Label" parent="Stats/HBox/Stamina" unique_id=1523039497]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.28, 1)
+theme_override_font_sizes/font_size = 14
+text = "STAMINA"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="Stats/HBox/Stamina" unique_id=1248983265]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="StaminaRank" type="Label" parent="Stats/HBox/Stamina/Row" unique_id=1177259723]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "G"
+
+[node name="StaminaValue" type="Label" parent="Stats/HBox/Stamina/Row" unique_id=123510774]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="StaminaGain" type="Label" parent="Stats/HBox/Stamina/Row" unique_id=1547400853]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 1, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0"
+
+[node name="StaminaBar" type="ProgressBar" parent="Stats/HBox/Stamina" unique_id=1372451976]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_stamina")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Power" type="VBoxContainer" parent="Stats/HBox" unique_id=666564874]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="PowerName" type="Label" parent="Stats/HBox/Power" unique_id=855206284]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.25, 1)
+theme_override_font_sizes/font_size = 14
+text = "POWER"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="Stats/HBox/Power" unique_id=1814855886]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="PowerRank" type="Label" parent="Stats/HBox/Power/Row" unique_id=700541288]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "G"
+
+[node name="PowerValue" type="Label" parent="Stats/HBox/Power/Row" unique_id=1629830514]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="PowerGain" type="Label" parent="Stats/HBox/Power/Row" unique_id=897199731]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 1, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0"
+
+[node name="PowerBar" type="ProgressBar" parent="Stats/HBox/Power" unique_id=1804678195]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_power")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Guts" type="VBoxContainer" parent="Stats/HBox" unique_id=1695652319]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="GutsName" type="Label" parent="Stats/HBox/Guts" unique_id=1131008790]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.48, 0.68, 1)
+theme_override_font_sizes/font_size = 14
+text = "GUTS"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="Stats/HBox/Guts" unique_id=1570783619]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="GutsRank" type="Label" parent="Stats/HBox/Guts/Row" unique_id=850826694]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "G"
+
+[node name="GutsValue" type="Label" parent="Stats/HBox/Guts/Row" unique_id=1687385382]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="GutsGain" type="Label" parent="Stats/HBox/Guts/Row" unique_id=457861202]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 1, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0"
+
+[node name="GutsBar" type="ProgressBar" parent="Stats/HBox/Guts" unique_id=438733117]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_guts")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Wit" type="VBoxContainer" parent="Stats/HBox" unique_id=653284621]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="WitName" type="Label" parent="Stats/HBox/Wit" unique_id=463215109]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38, 0.86, 0.58, 1)
+theme_override_font_sizes/font_size = 14
+text = "WIT"
+horizontal_alignment = 1
+
+[node name="Row" type="HBoxContainer" parent="Stats/HBox/Wit" unique_id=1816615924]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="WitRank" type="Label" parent="Stats/HBox/Wit/Row" unique_id=1369745556]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "G"
+
+[node name="WitValue" type="Label" parent="Stats/HBox/Wit/Row" unique_id=416313190]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="WitGain" type="Label" parent="Stats/HBox/Wit/Row" unique_id=665627351]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 1, 0.55, 1)
+theme_override_font_sizes/font_size = 18
+text = "+0"
+
+[node name="WitBar" type="ProgressBar" parent="Stats/HBox/Wit" unique_id=1183221737]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_barbg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_wit")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="HintLabel" type="Label" parent="." unique_id=595055487]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -230.0
+offset_right = 300.0
+offset_bottom = -206.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 18
+text = "Choose a training"
+horizontal_alignment = 1
+
+[node name="TrainingButtons" type="HBoxContainer" parent="." unique_id=209568765]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -452.0
+offset_top = -188.0
+offset_right = 452.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="RestButton" type="Button" parent="TrainingButtons" unique_id=1010533284]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 146)
+layout_mode = 2
+text = "REST"
+
+[node name="SpacerL" type="Control" parent="TrainingButtons" unique_id=1166823331]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SpeedButton" type="Button" parent="TrainingButtons" unique_id=820501255]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 146)
+layout_mode = 2
+
+[node name="Stripe" type="ColorRect" parent="TrainingButtons/SpeedButton" unique_id=1228550997]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.3, 0.62, 1, 1)
+
+[node name="SpeedFail" type="Label" parent="TrainingButtons/SpeedButton" unique_id=716954197]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "FAIL 0%"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TrainingButtons/SpeedButton" unique_id=1521932584]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -15.0
+offset_right = 58.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.3, 0.62, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "SPEED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedLevel" type="Label" parent="TrainingButtons/SpeedButton" unique_id=1586816372]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="StaminaButton" type="Button" parent="TrainingButtons" unique_id=207000260]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 146)
+layout_mode = 2
+
+[node name="Stripe" type="ColorRect" parent="TrainingButtons/StaminaButton" unique_id=1649742475]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(1, 0.55, 0.28, 1)
+
+[node name="StaminaFail" type="Label" parent="TrainingButtons/StaminaButton" unique_id=346306823]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "FAIL 0%"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TrainingButtons/StaminaButton" unique_id=636561391]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -15.0
+offset_right = 58.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.28, 1)
+theme_override_font_sizes/font_size = 22
+text = "STAMINA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaLevel" type="Label" parent="TrainingButtons/StaminaButton" unique_id=1729741366]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="PowerButton" type="Button" parent="TrainingButtons" unique_id=590113000]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 146)
+layout_mode = 2
+
+[node name="Stripe" type="ColorRect" parent="TrainingButtons/PowerButton" unique_id=1971790305]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(1, 0.82, 0.25, 1)
+
+[node name="PowerFail" type="Label" parent="TrainingButtons/PowerButton" unique_id=1519074149]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "FAIL 0%"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TrainingButtons/PowerButton" unique_id=281453213]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -15.0
+offset_right = 58.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.25, 1)
+theme_override_font_sizes/font_size = 22
+text = "POWER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerLevel" type="Label" parent="TrainingButtons/PowerButton" unique_id=134714258]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="GutsButton" type="Button" parent="TrainingButtons" unique_id=210998402]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 146)
+layout_mode = 2
+
+[node name="Stripe" type="ColorRect" parent="TrainingButtons/GutsButton" unique_id=1325331810]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(1, 0.48, 0.68, 1)
+
+[node name="GutsFail" type="Label" parent="TrainingButtons/GutsButton" unique_id=1608757832]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "FAIL 0%"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TrainingButtons/GutsButton" unique_id=908840234]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -15.0
+offset_right = 58.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.48, 0.68, 1)
+theme_override_font_sizes/font_size = 22
+text = "GUTS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GutsLevel" type="Label" parent="TrainingButtons/GutsButton" unique_id=1137780260]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="WitButton" type="Button" parent="TrainingButtons" unique_id=777821921]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 146)
+layout_mode = 2
+
+[node name="Stripe" type="ColorRect" parent="TrainingButtons/WitButton" unique_id=846483068]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.38, 0.86, 0.58, 1)
+
+[node name="WitFail" type="Label" parent="TrainingButtons/WitButton" unique_id=1051980444]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 12.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "FAIL 0%"
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="TrainingButtons/WitButton" unique_id=732965634]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -15.0
+offset_right = 58.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.38, 0.86, 0.58, 1)
+theme_override_font_sizes/font_size = 22
+text = "WIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WitLevel" type="Label" parent="TrainingButtons/WitButton" unique_id=1416008416]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "LV 1"
+horizontal_alignment = 1
+
+[node name="SpacerR" type="Control" parent="TrainingButtons" unique_id=1390602554]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RaceButton" type="Button" parent="TrainingButtons" unique_id=662220981]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 146)
+layout_mode = 2
+text = "RACE"
+
 [node name="Pause" type="TextureButton" parent="." unique_id=789442640]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -105,3 +945,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
