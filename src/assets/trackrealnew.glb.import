@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b7ubuv2ob5v44"
-path="res://.godot/imported/horse_gallop.glb-a4644a3f19492a003d7b035453627a84.scn"
+uid="uid://8wb17tjxcxre"
+path="res://.godot/imported/trackrealnew.glb-e9290996f85f67f9719765844330a052.scn"
 
 [deps]
 
-source_file="res://horse_race/horse_gallop.glb"
-dest_files=["res://.godot/imported/horse_gallop.glb-a4644a3f19492a003d7b035453627a84.scn"]
+source_file="res://assets/trackrealnew.glb"
+dest_files=["res://.godot/imported/trackrealnew.glb-e9290996f85f67f9719765844330a052.scn"]
 
 [params]
 

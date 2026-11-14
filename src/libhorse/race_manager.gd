@@ -211,7 +211,7 @@ func spawn_lineup(lineup: Array[Dictionary]) -> void:
 	var usable := track.width * 0.92
 	var lanes := n  # everyone abreast in one horizontal line, like starting gates
 	var spacing := usable / float(lanes)
-	var scale_v := horse_scale if horse_scale > 0.001 else 0.075  # fixed scale, no auto-fit
+	var scale_v := horse_scale if horse_scale > 0.001 else 0.045  # fixed scale, no auto-fit
 	var len_w := Racer.MODEL_LENGTH * scale_v
 	var limit := usable * 0.5 - Racer.MODEL_WIDTH * scale_v * 0.5
 

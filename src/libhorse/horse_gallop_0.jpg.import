@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://r1qbfoiyrlmg"
-path.s3tc="res://.godot/imported/horse_gallop_0.jpg-0ae647bc19356b4de8b4a8fb12f554d3.s3tc.ctex"
+path.s3tc="res://.godot/imported/horse_gallop_0.jpg-58f883b59e31a54b4e3fd24fe2f9a736.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://horse_race/horse_gallop_0.jpg"
-dest_files=["res://.godot/imported/horse_gallop_0.jpg-0ae647bc19356b4de8b4a8fb12f554d3.s3tc.ctex"]
+source_file="res://libhorse/horse_gallop_0.jpg"
+dest_files=["res://.godot/imported/horse_gallop_0.jpg-58f883b59e31a54b4e3fd24fe2f9a736.s3tc.ctex"]
 
 [params]
 
