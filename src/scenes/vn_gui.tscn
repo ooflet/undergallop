@@ -64,7 +64,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -200.0
-offset_bottom = -197.0
+offset_bottom = -198.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 1)
@@ -98,7 +98,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_hp63c")
 theme_override_font_sizes/font_size = 16
-text = "UNDERGROUND RACING ASSOCIATION"
+text = "UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / UNDERGROUND RACING ASSOCIATION / UGRA / "
 
 [node name="Dialogue" type="Label" parent="." unique_id=1113301359]
 custom_minimum_size = Vector2(950, 110)

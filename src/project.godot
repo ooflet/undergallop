@@ -11,8 +11,11 @@ config_version=5
 [application]
 
 config/name="Undergallop"
-run/main_scene="uid://bcyffsjfbtrnr"
+run/main_scene="uid://drvp582agtsl8"
 config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://dvup4gvxcsmpj"
 config/icon="res://icon.svg"
 
 [display]

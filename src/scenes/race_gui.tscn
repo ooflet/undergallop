@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bdyk3ca1lc5hq" path="res://gui/theme.tres" id="1_bujbo"]
 [ext_resource type="Texture2D" uid="uid://dve4duttpkioi" path="res://assets/ugra_white.png" id="2_buknr"]
+[ext_resource type="Texture2D" uid="uid://kvureawlkmhd" path="res://assets/pause.svg" id="3_buknr"]
 
 [sub_resource type="Gradient" id="Gradient_are0y"]
 colors = PackedColorArray(0, 0, 0, 0.5882353, 0, 0, 0, 0)
@@ -87,3 +88,16 @@ offset_right = 537.0
 offset_bottom = 281.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_buknr")
+
+[node name="Pause" type="TextureButton" parent="." unique_id=321527274]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 153.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_buknr")

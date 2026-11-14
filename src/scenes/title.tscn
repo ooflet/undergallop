@@ -9,3 +9,7 @@
 
 [node name="Node3D" parent="." unique_id=1368945433 instance=ExtResource("2_p6dhs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09589577, 0, 1.7373049)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=1563292787]
+transform = Transform3D(-0.6830127, 0.25881904, 0.6830127, -0.023729444, 0.9267566, -0.3749122, -0.73002094, -0.2722773, -0.62684494, 0.44947112, 0.1460703, -8.494414)
+fov = 100.0

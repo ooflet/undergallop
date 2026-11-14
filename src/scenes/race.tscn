@@ -1,14 +1,19 @@
 [gd_scene format=3 uid="uid://cv1dm75nv4ti5"]
 
 [ext_resource type="PackedScene" uid="uid://chb41gn4tpyl3" path="res://scenes/race_gui.tscn" id="1_l1ls3"]
-[ext_resource type="PackedScene" uid="uid://b7hgkn40pbvy4" path="res://assets/slow_dancer_jojo_steel_ball_run.glb" id="1_lrjie"]
 [ext_resource type="PackedScene" uid="uid://bcyffsjfbtrnr" path="res://scenes/course.tscn" id="2_l1ls3"]
+[ext_resource type="Script" uid="uid://cq54ltagkqbpx" path="res://horse_race/race_manager.gd" id="3_race"]
 
 [node name="Race" type="Node3D" unique_id=671209138]
 
 [node name="Gui" parent="." unique_id=1889157752 instance=ExtResource("1_l1ls3")]
 
-[node name="horse" parent="." unique_id=807495598 instance=ExtResource("1_lrjie")]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, 0.691, 0.05, -7.526)
-
 [node name="Node3D" parent="." unique_id=1368945433 instance=ExtResource("2_l1ls3")]
+
+[node name="RaceManager" type="Node3D" parent="." unique_id=1122334455]
+script = ExtResource("3_race")
+laps = 3
+race_duration = 120.0
+player_name = "2steedy"
+horse_scale = 0.0
+horse_height = 0.05
